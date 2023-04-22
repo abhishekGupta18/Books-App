@@ -7,13 +7,16 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { BooksContextProvider } from "./Context/BooksContext";
+import { FavBooksContextProvider } from "./Context/FavBookContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
       <BooksContextProvider>
-        <App />
+        <FavBooksContextProvider>
+          <App />
+        </FavBooksContextProvider>
       </BooksContextProvider>
     </Router>
   </React.StrictMode>
