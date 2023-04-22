@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { fakeFetch } from "../fakeFetch";
 
-const BooksContext = createContext();
+export const BooksContext = createContext();
 
 export const BooksContextProvider = ({ children }) => {
   const [booksList, setBooksList] = useState({});
@@ -17,12 +17,38 @@ export const BooksContextProvider = ({ children }) => {
       console.error(e);
     }
   };
+
   useEffect(() => {
     getData();
   }, []);
 
+  const addToRead = (id) => {
+    const bookToAdd = booksList?.books?.map((item) => {
+      if (item?.id === id) {
+        return { ...item, read: true };
+      } else {
+        return item;
+      }
+    });
+    setBooksList({ ...booksList, books: bookToAdd }); // react most imp line niharika op 🙌🙌
+  };
+
+  const removeFromRead = (id) => {
+    const bookToRemove = booksList?.books?.map((item) => {
+      if (item?.id === id) {
+        return { ...item, read: false };
+      } else {
+        return item;
+      }
+    });
+    setBooksList({ ...booksList, books: bookToRemove });
+  };
+
+  const readBooks = booksList?.books?.filter((item) => item.read);
   return (
-    <BooksContext.Provider value={{ booksList }}>
+    <BooksContext.Provider
+      value={{ booksList, readBooks, addToRead, removeFromRead }}
+    >
       {children}
     </BooksContext.Provider>
   );

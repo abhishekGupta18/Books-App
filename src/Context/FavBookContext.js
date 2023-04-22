@@ -17,8 +17,11 @@ export const FavBooksContextProvider = ({ children }) => {
     setFavBooks(removeBook);
   };
 
+  const checkBook = (id) => favBooks.findIndex((item) => item.id === id);
   return (
-    <FavBooksContext.Provider value={{ addToFav, removeFromFav, favBooks }}>
+    <FavBooksContext.Provider
+      value={{ addToFav, removeFromFav, favBooks, checkBook }}
+    >
       {children}
     </FavBooksContext.Provider>
   );

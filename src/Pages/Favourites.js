@@ -2,9 +2,10 @@ import "./FavBooks.css";
 import { useFavBooksContext } from "../Context/FavBookContext";
 export const FavouriteBooks = () => {
   const { favBooks, removeFromFav } = useFavBooksContext();
-  console.log(favBooks);
+
   return (
     <div>
+      <h1>Favourite books</h1>
       <ul
         style={{
           display: "flex",
